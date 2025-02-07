@@ -33,7 +33,6 @@
         "next-env.d.ts",
         "**/*.ts",
         "**/*.tsx",
-        "components/navbar.js",
         "pages/index.js"
     ],
     "exclude": [

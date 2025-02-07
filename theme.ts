@@ -1,6 +1,6 @@
 import { createTheme } from '@mantine/core';
 
-export const theme = createTheme({
+const theme = createTheme({
     colors: {
         brand: [
             "#f0f9fa", // 0 - Lightest
@@ -17,5 +17,6 @@ export const theme = createTheme({
     },
     primaryColor: 'brand',
     defaultRadius: 'md',
-
 });
+
+export default theme;

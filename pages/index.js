@@ -1,10 +1,8 @@
 import { useState, useEffect } from 'react';
-import { Container, Text, Button, Card, Title, Progress, Divider, Box, Flex } from '@mantine/core';
+import { Container, Text, Button, Card, Title, Progress, Divider } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
+import theme from "@/theme"
 import confetti from 'canvas-confetti';
-import { theme } from '@/theme';
-import { IconCalendar, IconCamera, IconHome, IconImageInPicture, IconMovie, IconNote, IconPictureInPicture } from '@tabler/icons-react';
-import { useRouter } from 'next/router';
 
 // Daily Quotes (Editable List)
 const quotes = [
@@ -13,25 +11,7 @@ const quotes = [
     "Every journey is better with you by my side.",
 ];
 
-let navStyle = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRight: `1px solid ${theme.colors.brand[5]}`
-}
-let navStyleActive = {
-    display: "flex",
-    flexDirection: "column",
-    justifyContent: "center",
-    alignItems: "center",
-    borderRight: `1px solid ${theme.colors.brand[5]}`,
-    backgroundColor: theme.colors.brand[5],
-    color: "#fff"
-}
-
 export default function Home() {
-    let router = useRouter();
     const [quote, setQuote] = useState('');
     const [loveMeter, setLoveMeter] = useState(0);
     const [firstOpen, setFirstOpen] = useLocalStorage({ key: 'first-open', defaultValue: true });
@@ -73,10 +53,10 @@ export default function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    return <Box w={"100vw"} h={"100vh"} pb={0} mb={0}>
-        <Container size="sm" py="xl" w={"100vw"} h={"93vh"}>
+    return (
+        <Container size="sm" py="xl">
             {/* Title */}
-            <Title align="center">The Idom Home Base</Title>
+            <Title align="center">Welcome</Title>
 
             <Divider my="lg" />
 
@@ -86,12 +66,12 @@ export default function Home() {
             </Card>
 
             {/* Love Meter */}
-            <Card shadow="sm" p="lg" radius="md" withBorder mt="md" >
-                <Text align="center" size="lg">🎉 Keep Clicking for Attention! 🎉</Text>
-                <Progress value={Math.min(loveMeter, 100)} color="brand" size="lg" radius="xl" mt="md" />
+            <Card shadow="sm" p="lg" radius="md" withBorder mt="md">
+                <Text align="center" size="lg">Click for Attention!</Text>
+                <Progress value={Math.min(loveMeter, 100)} color={theme.colors.brand[5]} size="lg" radius="xl" mt="md" />
                 <Button
                     fullWidth mt="md"
-                    color="brand"
+                    color={theme.colors.brand[5]}
                     onClick={() => {
                         setLoveMeter(loveMeter + 5);
                         confetti({ particleCount: 10, spread: 50 });
@@ -104,20 +84,20 @@ export default function Home() {
             {/* Wedding Countdown */}
             <Card shadow="sm" p="lg" radius="md" withBorder mt="md">
                 <Text align="center" size="lg" weight={700} transform="uppercase">
-                    🔔 Wedding Countdown 🔔
+                    Wedding Countdown
                 </Text>
 
-                <Container style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }} px={0}>
+                <Container style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }}>
                     {Object.entries(countdown).map(([label, value]) => (
                         <div key={label} style={{
                             textAlign: "center",
-                            minWidth: "50px",
-                            padding: "8px",
+                            minWidth: "60px",
+                            padding: "10px",
                             borderRadius: "10px",
                             background: theme.colors.brand[5],
                             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
                             color: "#fff",
-                            fontSize: "28px",
+                            fontSize: "32px",
                             fontWeight: "bold",
                             animation: "fadeIn 0.5s ease-in-out",
                         }}>
@@ -135,31 +115,6 @@ export default function Home() {
           100% { opacity: 1; transform: scale(1); }
         }
       `}</style>
-
         </Container>
-        <Flex w={"100vw"} h={"7vh"} p={0} direction={"row"}
-            style={{ borderTop: `1px solid ${theme.colors.brand[5]}` }}
-        >
-            <Box w={"20%"} style={navStyle} onClick={() => router.push("/notes")} >
-                <IconNote color={theme.colors.brand[5]} />
-                <Text>Notes</Text>
-            </Box>
-            <Box w={"20%"} style={navStyle} onClick={() => router.push("/movies")} >
-                <IconMovie color={theme.colors.brand[5]} />
-                <Text>Movies</Text>
-            </Box>
-            <Box w={"20%"} style={navStyleActive} onClick={() => router.push("/")} >
-                <IconHome color={"white"} />
-                <Text>Home</Text>
-            </Box>
-            <Box w={"20%"} style={navStyle} onClick={() => router.push("/pictures")} >
-                <IconCamera color={theme.colors.brand[5]} />
-                <Text>Pictures</Text>
-            </Box>
-            <Box w={"20%"} style={navStyle} bd={0} onClick={() => router.push("/calendar")} >
-                <IconCalendar color={theme.colors.brand[5]} />
-                <Text>Calendar</Text>
-            </Box>
-        </Flex>
-    </Box>
+    );
 }
