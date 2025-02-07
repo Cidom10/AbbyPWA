@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Container, Text, Button, Card, Title, Progress, Divider } from '@mantine/core';
+import { Container, Text, Button, Card, Title, Progress, Divider, Box, Flex } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
 import theme from "@/theme"
 import confetti from 'canvas-confetti';
+import { IconCalendar, IconCamera, IconHome, IconMovie, IconNote } from '@tabler/icons-react';
 
 // Daily Quotes (Editable List)
 const quotes = [
@@ -53,10 +54,10 @@ export default function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    return (
-        <Container size="sm" py="xl">
+    return <Box w={"100vw"} h={"100vh"}>
+        <Container size="sm" py="xl" h={"93vh"}>
             {/* Title */}
-            <Title align="center">Welcome</Title>
+            <Title align="center">The Idom Homebase</Title>
 
             <Divider my="lg" />
 
@@ -82,17 +83,17 @@ export default function Home() {
             </Card>
 
             {/* Wedding Countdown */}
-            <Card shadow="sm" p="lg" radius="md" withBorder mt="md">
+            <Card shadow="sm" p="lg" radius="md" withBorder mt="md" pl={0}>
                 <Text align="center" size="lg" weight={700} transform="uppercase">
                     Wedding Countdown
                 </Text>
 
-                <Container style={{ display: "flex", justifyContent: "center", gap: "10px", marginTop: "10px" }}>
+                <Container style={{ display: "flex", justifyContent: "space-around", gap: "10px", marginTop: "10px" }} >
                     {Object.entries(countdown).map(([label, value]) => (
                         <div key={label} style={{
                             textAlign: "center",
                             minWidth: "60px",
-                            padding: "10px",
+                            padding: "8px",
                             borderRadius: "10px",
                             background: theme.colors.brand[5],
                             boxShadow: "0px 0px 10px rgba(0, 0, 0, 0.2)",
@@ -116,5 +117,29 @@ export default function Home() {
         }
       `}</style>
         </Container>
-    );
+        <Flex direction={"row"} w={"100vw"} h={"7vh"} justify={"center"} align={"center"} p={0}
+            style={{ borderTop: `1px solid ${theme.colors.brand[5]}`, position: "absolute", bottom: 0, borderRadius: "20px" }}
+        >
+            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+                <IconNote color={theme.colors.brand[5]} />
+                <Text>Notes</Text>
+            </Flex>
+            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+                <IconMovie color={theme.colors.brand[5]} />
+                <Text>Movies</Text>
+            </Flex>
+            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+                <IconHome color={theme.colors.brand[5]} />
+                <Text>Home</Text>
+            </Flex>
+            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+                <IconCamera color={theme.colors.brand[5]} />
+                <Text>Pictures</Text>
+            </Flex>
+            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}>
+                <IconCalendar color={theme.colors.brand[5]} />
+                <Text>Dates</Text>
+            </Flex>
+        </Flex>
+    </Box>;
 }
