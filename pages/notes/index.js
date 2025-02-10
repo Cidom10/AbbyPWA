@@ -59,7 +59,8 @@ export default function NotesPage() {
     // Delete a note from Firebase Firestore under the correct author
     const deleteNote = async (id, author) => {
         try {
-            await deleteDoc(doc(db, 'notes', author, 'userNotes', id));
+            if (author == 'Cal') await deleteDoc(doc(db, 'calNotes', id));
+            else if (author == 'Abby') await deleteDoc(doc(db, 'abbyNotes', id));
             setNotes(notes.filter((note) => note.id !== id));
         } catch (error) {
             console.error("Error deleting note: ", error);
