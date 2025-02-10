@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Container, Text, Button, Card, Title, Progress, Divider, Box, Flex } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
-import theme from "@/theme"
+import theme from "../theme"
 import confetti from 'canvas-confetti';
 import { IconCalendar, IconCamera, IconHome, IconMovie, IconNote } from '@tabler/icons-react';
 
