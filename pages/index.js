@@ -1,15 +1,13 @@
 import { useState, useEffect } from 'react';
-import { Container, Text, Button, Card, Title, Progress, Divider, Box, Flex } from '@mantine/core';
+import { Container, Text, Button, Card, Title, Progress, Divider, Box, Flex, Anchor } from '@mantine/core';
 import { useLocalStorage } from '@mantine/hooks';
 import theme from "../theme"
 import confetti from 'canvas-confetti';
-import { IconCalendar, IconCamera, IconHome, IconMovie, IconNote } from '@tabler/icons-react';
+import Navbar from "../components/Navbar";
 
 // Daily Quotes (Editable List)
 const quotes = [
-    "A meaningful connection grows stronger every day.",
-    "The best moments are the ones we share.",
-    "Every journey is better with you by my side.",
+    "Really cool quote"
 ];
 
 export default function Home() {
@@ -117,29 +115,6 @@ export default function Home() {
         }
       `}</style>
         </Container>
-        <Flex direction={"row"} w={"100vw"} h={"7vh"} justify={"center"} align={"center"} p={0}
-            style={{ borderTop: `1px solid ${theme.colors.brand[5]}`, position: "absolute", bottom: 0, borderRadius: "20px" }}
-        >
-            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
-                <IconNote color={theme.colors.brand[5]} />
-                <Text>Notes</Text>
-            </Flex>
-            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
-                <IconMovie color={theme.colors.brand[5]} />
-                <Text>Movies</Text>
-            </Flex>
-            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
-                <IconHome color={theme.colors.brand[5]} />
-                <Text>Home</Text>
-            </Flex>
-            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
-                <IconCamera color={theme.colors.brand[5]} />
-                <Text>Pictures</Text>
-            </Flex>
-            <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}>
-                <IconCalendar color={theme.colors.brand[5]} />
-                <Text>Dates</Text>
-            </Flex>
-        </Flex>
+        <Navbar />
     </Box>;
 }
