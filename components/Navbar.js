@@ -25,7 +25,10 @@ function Navbar() {
             <IconHome color={theme.colors.brand[5]} />
             <Text>Home</Text>
         </Flex>
-        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}
+            style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}
+            onClick={() => window.location.href = "/pictures"}
+        >
             <IconCamera color={theme.colors.brand[5]} />
             <Text>Pictures</Text>
         </Flex>

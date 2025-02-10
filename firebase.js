@@ -1,20 +1,22 @@
 // Import the functions you need from the SDKs you need
-import { initializeApp } from "firebase/app";
+import { getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
+import { getStorage } from "firebase/storage";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-    apiKey: "AIzaSyBDDcpNJNIKk9kMeMUM8m7CdgloGFGX98A",
-    authDomain: "abbyapp-f2063.firebaseapp.com",
-    databaseURL: "https://abbyapp-f2063-default-rtdb.firebaseio.com",
-    projectId: "abbyapp-f2063",
-    storageBucket: "abbyapp-f2063.firebasestorage.app",
-    messagingSenderId: "846444621215",
-    appId: "1:846444621215:web:2f0883e690deb41ba021aa"
+    apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+    authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+    databaseURL: process.env.NEXT_PUBLIC_DATABASE_URL,
+    projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+    storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+    messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+    appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID
 };
 
 // Initialize Firebase
-export const app = initializeApp(firebaseConfig);
-export const db = getFirestore(app)
+const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+export const db = getFirestore(app);
+export const storage = getStorage(app);
