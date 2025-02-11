@@ -35,7 +35,9 @@ function Navbar() {
             <IconCamera color={theme.colors.brand[5]} />
             <Text>Pictures</Text>
         </Flex>
-        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}>
+        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}
+            onClick={() => window.location.href = "/dates"}
+        >
             <IconCalendar color={theme.colors.brand[5]} />
             <Text>Dates</Text>
         </Flex>
