@@ -14,7 +14,10 @@ function Navbar() {
             <IconNote color={theme.colors.brand[5]} />
             <Text>Notes</Text>
         </Flex>
-        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"} style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}>
+        <Flex direction={"column"} justify={"center"} align={"center"} w={"20%"} h={"100%"}
+            style={{ borderRight: `1px solid ${theme.colors.brand[5]}` }}
+            onClick={() => window.location.href = "/movies"}
+        >
             <IconMovie color={theme.colors.brand[5]} />
             <Text>Movies</Text>
         </Flex>
