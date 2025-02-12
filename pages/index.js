@@ -18,6 +18,42 @@ export default function Home() {
     const [firstOpen, setFirstOpen] = useLocalStorage({ key: 'first-open', defaultValue: true });
     const [countdown, setCountdown] = useState({ days: 0, hours: 0, minutes: 0, seconds: 0 });
     const [fcmToken, setFcmToken] = useState("");
+    const [deferredPrompt, setDeferredPrompt] = useState(null);
+
+    useEffect(() => {
+        const handleBeforeInstallPrompt = (event) => {
+            event.preventDefault(); // Prevent auto-prompt so we can trigger it manually
+            setDeferredPrompt(event); // Store the event
+        };
+
+        window.addEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+
+        return () => {
+            window.removeEventListener("beforeinstallprompt", handleBeforeInstallPrompt);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (deferredPrompt) {
+            const triggerInstallPrompt = () => {
+                deferredPrompt.prompt();
+                deferredPrompt.userChoice.then((choiceResult) => {
+                    if (choiceResult.outcome === "accepted") {
+                        console.log("User accepted the PWA installation");
+                    } else {
+                        console.log("User dismissed the PWA installation");
+                    }
+                    setDeferredPrompt(null); // Reset prompt after user decision
+                });
+
+                // Remove the listener after first interaction
+                document.removeEventListener("click", triggerInstallPrompt);
+            };
+
+            // Listen for the user's first interaction
+            document.addEventListener("click", triggerInstallPrompt, { once: true });
+        }
+    }, [deferredPrompt]);
 
     useEffect(() => {
         setQuote(quotes[Math.floor(Math.random() * quotes.length)]);
