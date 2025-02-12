@@ -76,6 +76,11 @@ export default function Home() {
                         // ...
                         console.log("Token: ", currentToken);
                         setFcmToken(currentToken);
+                        // Save token to Firestore under 'devices'
+                        setDoc(doc(collection(db, "devices"), token), {
+                            token,
+                            timestamp: new Date(),
+                        });
 
                     } else {
                         // Show permission request UI
@@ -98,7 +103,7 @@ export default function Home() {
         await fetch("/api/sendNotification", {
             method: "POST",
             headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ message: "Your progress bar is full!", token: fcmToken }),
+            body: JSON.stringify({ message }),
         });
     };
 
