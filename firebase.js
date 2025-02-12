@@ -2,6 +2,7 @@
 import { getApps, initializeApp } from "firebase/app";
 import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
+import { getMessaging, getToken } from "firebase/messaging";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -17,6 +18,22 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
+export const app = getApps().length ? getApps()[0] : initializeApp(firebaseConfig);
 export const db = getFirestore(app);
 export const storage = getStorage(app);
+// export const messaging = getMessaging(app);
+// let messaging;
+// if (typeof window !== "undefined" && "serviceWorker" in navigator) {
+//     navigator.serviceWorker
+//         .register("/firebase-messaging-sw.js")
+//         .then((registration) => {
+//             console.log("Service Worker registered:", registration);
+//         })
+//         .catch((err) => {
+//             console.error("Service Worker registration failed:", err);
+//         });
+
+//     messaging = getMessaging(app);
+// }
+
+// export { messaging, getToken, onMessage }
