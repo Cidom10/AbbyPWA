@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Container, Title, Button, Grid, Card, Image, Text, Group, ActionIcon, Modal, TextInput, Loader, Box } from '@mantine/core';
+import { Container, Title, Button, Grid, Card, Image, Text, Group, ActionIcon, Modal, TextInput, Loader, Box, ScrollArea } from '@mantine/core';
 import { IconPlus, IconSearch, IconTrash } from '@tabler/icons-react';
 import { db } from '@/firebase';
 import { collection, addDoc, getDocs, deleteDoc, doc } from 'firebase/firestore';
@@ -64,7 +64,7 @@ export default function MoviesPage() {
         setMovies(movies.filter((movie) => movie.id !== id));
     };
 
-    return <Box w={"100vw"} h={"100vh"} p={0}>
+    return <Box w={"100vw"} h={"100vh"} p={0} pos={"relative"}>
         <Container size="md" py="xl" h={"93vh"}>
             <Title align="center" mb="md">Movie Watchlist</Title>
 
@@ -73,21 +73,23 @@ export default function MoviesPage() {
             </Button>
 
             {/* Movies Grid (Fixed 3-Column Layout & Uniform Height Cards) */}
-            <Grid gutter="md" columns={3}>
-                {movies.map((movie) => (
-                    <Grid.Col key={movie.id} span={1}>
-                        <Card shadow="sm" radius="md" h={220} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
-                            <Image src={movie.poster} height={200} radius="md" />
-                            <Text align="center" weight={600} lineClamp={1} mt="sm">{movie.title}</Text>
-                            <Group position="center" mt="sm">
-                                <ActionIcon color="red" size="sm" onClick={() => deleteMovie(movie.id)}>
-                                    <IconTrash size={18} />
-                                </ActionIcon>
-                            </Group>
-                        </Card>
-                    </Grid.Col>
-                ))}
-            </Grid>
+            <ScrollArea h="70vh" scrollbars="y">
+                <Grid gutter="md" columns={3}>
+                    {movies.map((movie) => (
+                        <Grid.Col key={movie.id} span={1}>
+                            <Card shadow="md" bd={"1px solid black"} radius="md" h={220} sx={{ display: "flex", flexDirection: "column", justifyContent: "space-between" }}>
+                                <Image src={movie.poster} height={200} radius="md" />
+                                <Text align="center" weight={600} lineClamp={1} mt="sm">{movie.title}</Text>
+                                <Group position="center" mt="sm">
+                                    <ActionIcon color="red" size="sm" onClick={() => deleteMovie(movie.id)}>
+                                        <IconTrash size={18} />
+                                    </ActionIcon>
+                                </Group>
+                            </Card>
+                        </Grid.Col>
+                    ))}
+                </Grid>
+            </ScrollArea>
 
             {/* Add Movie Modal */}
             <Modal opened={modalOpen} onClose={() => setModalOpen(false)} title="Search for a Movie">

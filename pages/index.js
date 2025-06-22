@@ -141,7 +141,7 @@ export default function Home() {
         return () => clearInterval(interval);
     }, []);
 
-    return <Box w={"100vw"} h={"100vh"}>
+    return <Box w={"100vw"} minHeight={"100vh"} p={0} style={{ display: 'flex', flexDirection: 'column' }}>
         <Container size="sm" py="xl" h={"93vh"}>
             {/* Title */}
             <Title align="center">The Idom Homebase</Title>
